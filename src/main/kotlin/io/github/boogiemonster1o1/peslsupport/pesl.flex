@@ -10,13 +10,13 @@ import static io.github.boogiemonster1o1.peslsupport.psi.PeslTypes.*;
 %%
 
 %{
-  public _PeslLexer() {
+  public PeslLexer() {
     this((java.io.Reader)null);
   }
 %}
 
 %public
-%class _PeslLexer
+%class PeslLexer
 %implements FlexLexer
 %function advance
 %type IElementType
@@ -32,6 +32,7 @@ IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 <YYINITIAL> {
   {WHITE_SPACE}      { return WHITE_SPACE; }
 
+  "\""               { return DOUBLE_QUOTE; }
   "function"         { return FUNCTION; }
   "true"             { return TRUE; }
   "false"            { return FALSE; }

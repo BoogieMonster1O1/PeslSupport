@@ -5,5 +5,5 @@ import com.intellij.openapi.util.IconLoader
 import javax.swing.Icon
 
 object PeslLanguage : Language("Pesl") {
-    val icon: Icon = IconLoader.getIcon("/icons/pesl.png", PeslLanguage::class.java)
+	val icon: Icon = IconLoader.getIcon("/icons/pesl.png", PeslLanguage::class.java)
 }

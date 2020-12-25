@@ -11,6 +11,7 @@
 	tokens = [
 		WHITE_SPACE = 'regexp:\s+'
 		IDENTIFIER = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
+		DOUBLE_QUOTE = '"'
 	]
 }
 
@@ -21,7 +22,7 @@ Body ::= Statement*
 
 Boolean ::= (true) | (false)
 Number ::= (0|1|2|3|4|5|6|7|8|9) ((0|1|2|3|4|5|6|7|8|9)*)
-String ::= ('"'(IDENTIFIER)?'"')
+String ::= (DOUBLE_QUOTE(IDENTIFIER)?DOUBLE_QUOTE)
 Value ::= Number | null | undefined  | String | Boolean | IDENTIFIER
 Throwable ::= !(undefined) Expression
 ContextAccess ::= IDENTIFIER '.'
