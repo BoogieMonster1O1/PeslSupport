@@ -24,7 +24,7 @@
 
 PeslFile ::= Definition*
 Definition ::= (FunctionDefinition | Statement)
-FunctionDefinition ::= function IDENTIFIER '(' ')' '{' Body '}'
+FunctionDefinition ::= function FunctionDeclName '(' ')' '{' Body '}'
 Body ::= Statement*
 
 Boolean ::= (true) | (false)
@@ -34,9 +34,12 @@ String ::= (DOUBLE_QUOTE(IDENTIFIER)?DOUBLE_QUOTE)
 Value ::= Number | null | undefined  | String | Boolean | IDENTIFIER
 Throwable ::= !(undefined) OperatedExpression
 ContextAccess ::= IDENTIFIER '.'
-FunctionInvocation ::= IDENTIFIER '(' ')'
+FunctionDeclName ::= IDENTIFIER
+FunctionCallName ::= IDENTIFIER
+VariableName ::= IDENTIFIER
+FunctionInvocation ::= FunctionCallName '(' ')'
 Access ::= ContextAccess | (FunctionInvocation '.')
-MapEntry ::= (String | IDENTIFIER) ':' OperatedExpression
+MapEntry ::= (String | VariableName) ':' OperatedExpression
 ListDeclaration ::= ('[' ']') | ('[' OperatedExpression (',' OperatedExpression)* ']')
 MapDeclaration ::= ('{' '}') | ('{' MapEntry (',' MapEntry)* '}')
 Expression ::= (Value | FunctionInvocationStatement | ListDeclaration | MapDeclaration)
@@ -59,8 +62,8 @@ ThrowStatement ::= throw Throwable
 IfStatement ::= if '(' OperatedExpression ')' '{' Body '}' (else '{' Body '}')?
 ForStatement ::= for '(' (VariableDeclarationStatement)? ';' (OperatedExpression)? ';' (OperatedExpression)? ')' '{' Body '}'
 ForeachStatement ::= ListForeachStatement | MapForeachStatement
-ListForeachStatement ::= foreach '(' IDENTIFIER ':' IDENTIFIER ')' '{' Body '}'
-MapForeachStatement ::= foreach '(' '(' IDENTIFIER ',' IDENTIFIER ')' ':' IDENTIFIER ')' '{' Body '}'
-VariableDeclarationStatement ::= let IDENTIFIER ('=' OperatedExpression)?
-VariableAssignmentStatement ::= IDENTIFIER '=' OperatedExpression
-TryCatchStatement ::= try '{' Body '}' catch '(' IDENTIFIER ')' '{' Body '}'
+ListForeachStatement ::= foreach '(' VariableName ':' VariableName ')' '{' Body '}'
+MapForeachStatement ::= foreach '(' '(' VariableName ',' VariableName ')' ':' VariableName ')' '{' Body '}'
+VariableDeclarationStatement ::= let VariableName ('=' OperatedExpression)?
+VariableAssignmentStatement ::= VariableName '=' OperatedExpression
+TryCatchStatement ::= try '{' Body '}' catch '(' VariableName ')' '{' Body '}'

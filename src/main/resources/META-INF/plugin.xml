@@ -19,6 +19,8 @@
                   extensions="pesl"/>
         <lang.parserDefinition language="Pesl"
                                implementationClass="io.github.boogiemonster1o1.peslsupport.PeslParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="Pesl"
+                                       implementationClass="io.github.boogiemonster1o1.peslsupport.PeslSyntaxHighlighterFactory"/>
     </extensions>
 
     <actions>
