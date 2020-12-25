@@ -33,6 +33,12 @@ IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
   {WHITE_SPACE}      { return WHITE_SPACE; }
 
   "\""               { return DOUBLE_QUOTE; }
+  "+"                { return OP_PLUS; }
+  "-"                { return OP_MINUS; }
+  "*"                { return OP_MULTIPLICATION; }
+  "/"                { return OP_DIVISION; }
+  "!"                { return OP_NOT; }
+  "="                { return OP_ASSIGN; }
   "function"         { return FUNCTION; }
   "true"             { return TRUE; }
   "false"            { return FALSE; }
