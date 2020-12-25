@@ -1,0 +1,56 @@
+{
+	elementTypeHolderClass="io.github.boogiemonster1o1.peslsupport.psi.PeslTypes"
+	parserClass="io.github.boogiemonster1o1.peslsupport.PeslParser"
+	psiImplClassSuffix = "Impl"
+	psiClassPrefix = "Pesl"
+	psiPackage = "io.github.boogiemonster1o1.peslsupport.psi"
+	psiImplPackage = "io.github.boogiemonster1o1.peslsupport.psi.impl"
+	extends = "com.intellij.extapi.psi.ASTWrapperPsiElement"
+	elementTypeClass="io.github.boogiemonster1o1.peslsupport.PeslElementType"
+
+	tokens = [
+		WHITE_SPACE = 'regexp:\s+'
+		IDENTIFIER = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
+	]
+}
+
+PeslFile ::= Definition*
+Definition ::= (FunctionDefinition | Statement)
+FunctionDefinition ::= function IDENTIFIER '(' ')' '{' Body '}'
+Body ::= Statement*
+
+Boolean ::= (true) | (false)
+Number ::= (0|1|2|3|4|5|6|7|8|9) ((0|1|2|3|4|5|6|7|8|9)*)
+String ::= ('"'(IDENTIFIER)?'"')
+Value ::= Number | null | undefined  | String | Boolean | IDENTIFIER
+Throwable ::= !(undefined) Expression
+ContextAccess ::= IDENTIFIER '.'
+FunctionInvocation ::= IDENTIFIER '(' ')'
+Access ::= ContextAccess | (FunctionInvocation '.')
+MapEntry ::= (String | IDENTIFIER) ':' Expression
+ListDeclaration ::= ('[' ']') | ('[' Expression (',' Expression)* ']')
+MapDeclaration ::= ('{' '}') | ('{' MapEntry (',' MapEntry)* '}')
+Expression ::= (Value | FunctionInvocationStatement | ListDeclaration | MapDeclaration)
+
+Statement ::= (FunctionInvocationStatement
+| ReturnStatement
+| ThrowStatement
+| IfStatement
+| VariableDeclarationStatement
+| VariableAssignmentStatement
+| ForStatement
+| ForeachStatement
+| TryCatchStatement
+) (';'?)
+
+FunctionInvocationStatement ::= ((Access*)) FunctionInvocation
+ReturnStatement ::= return Expression
+ThrowStatement ::= throw Throwable
+IfStatement ::= if '(' Expression ')' '{' Body '}' (else '{' Body '}')?
+ForStatement ::= for '(' (VariableDeclarationStatement)? ';' (Expression)? ';' (Expression)? ')' '{' Body '}'
+ForeachStatement ::= ListForeachStatement | MapForeachStatement
+ListForeachStatement ::= foreach '(' IDENTIFIER ':' IDENTIFIER ')' '{' Body '}'
+MapForeachStatement ::= foreach '(' '(' IDENTIFIER ',' IDENTIFIER ')' ':' IDENTIFIER ')' '{' Body '}'
+VariableDeclarationStatement ::= let IDENTIFIER ('=' Expression)?
+VariableAssignmentStatement ::= IDENTIFIER '=' Expression
+TryCatchStatement ::= try '{' Body '}' catch '(' IDENTIFIER ')' '{' Body '}'

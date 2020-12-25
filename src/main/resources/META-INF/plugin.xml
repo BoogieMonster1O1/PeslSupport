@@ -1,0 +1,27 @@
+<idea-plugin>
+    <id>io.github.boogiemonster1o1.PeslSupport</id>
+    <name>PeslSupport</name>
+    <vendor>BoogieMonster1O1</vendor>
+
+    <description><![CDATA[
+    <p><b>1.0.0</b>Initial release - PESL Language support</p>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="Pesl File"
+                  implementationClass="io.github.boogiemonster1o1.peslsupport.PeslLanguageFileType"
+                  fieldName="INSTANCE"
+                  language="Pesl"
+                  extensions="pesl"/>
+        <lang.parserDefinition language="Pesl"
+                               implementationClass="io.github.boogiemonster1o1.peslsupport.PeslParserDefinition"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
